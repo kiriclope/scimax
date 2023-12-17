@@ -752,11 +752,11 @@ With a prefix arg cycle backwards."
 		    (car headers))))))
 
 
-(defhydra scimax-ob-cycle-header-strings (:color red)
-  "cycle header args"
-  ("<left>" (scimax-ob-cycle-header-1 t))
-  ("<right>" (scimax-ob-cycle-header-1))
-  ("q" nil))
+;; (defhydra scimax-ob-cycle-header-strings (:color red)
+;;   "cycle header args"
+;;   ("<left>" (scimax-ob-cycle-header-1 t))
+;;   ("<right>" (scimax-ob-cycle-header-1))
+;;   ("q" nil))
 
 
 ;; * a hydra for src blocks
