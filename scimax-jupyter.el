@@ -398,58 +398,58 @@ This should only apply to jupyter-lang blocks."
 ;; These are more aligned with jupyter notebook I think
 
 ;; I had to use pretty hydra to get nicely aligned columns here.
-(use-package pretty-hydra)
+;; (use-package pretty-hydra)
 
-(pretty-hydra-define scimax-jupyter-org-hydra (:color blue :hint nil)
-  ("Execute"
-   (("<return>" org-ctrl-c-ctrl-c "current" :color red)
-    ("C-<return>" org-ctrl-c-ctrl-c "current" :color red)
-    ("S-<return>" jupyter-org-execute-and-next-block "current and next" :color red)
-    ("M-<return>" (progn (org-ctrl-c-ctrl-c) (scimax-ob-insert-src-block t)) "current and new" )
-    ("C-M-<return>" jupyter-org-execute-subtree "subtree")
-    ("S-C-<return>" jupyter-org-restart-and-execute-to-point "restart to point")
-    ("S-M-<return>" jupyter-org-restart-kernel-execute-buffer "restart buffer"))
+;; (pretty-hydra-define scimax-jupyter-org-hydra (:color blue :hint nil)
+;;   ("Execute"
+;;    (("<return>" org-ctrl-c-ctrl-c "current" :color red)
+;;     ("C-<return>" org-ctrl-c-ctrl-c "current" :color red)
+;;     ("S-<return>" jupyter-org-execute-and-next-block "current and next" :color red)
+;;     ("M-<return>" (progn (org-ctrl-c-ctrl-c) (scimax-ob-insert-src-block t)) "current and new" )
+;;     ("C-M-<return>" jupyter-org-execute-subtree "subtree")
+;;     ("S-C-<return>" jupyter-org-restart-and-execute-to-point "restart to point")
+;;     ("S-M-<return>" jupyter-org-restart-kernel-execute-buffer "restart buffer"))
 
-   "Navigate"
-   (("p" org-babel-previous-src-block "previous" :color red)
-    ("P" jupyter-org-previous-busy-src-block "previous busy")
-    ("n" org-babel-next-src-block  "next" :color red)
-    ("N" jupyter-org-next-busy-src-block "next busy" :color red)
-    ("g" jupyter-org-jump-to-visible-block "jump to visible src")
-    ("G" jupyter-org-jump-to-block "jump to src block")
-    ("e" scimax-jupyter-jump-to-error "Jump to error"))
+;;    "Navigate"
+;;    (("p" org-babel-previous-src-block "previous" :color red)
+;;     ("P" jupyter-org-previous-busy-src-block "previous busy")
+;;     ("n" org-babel-next-src-block  "next" :color red)
+;;     ("N" jupyter-org-next-busy-src-block "next busy" :color red)
+;;     ("g" jupyter-org-jump-to-visible-block "jump to visible src")
+;;     ("G" jupyter-org-jump-to-block "jump to src block")
+;;     ("e" scimax-jupyter-jump-to-error "Jump to error"))
 
-   "Edit"
-   (("<up>" jupyter-org-move-src-block "move up" :color red)
-    ("<down>" (jupyter-org-move-src-block t) "move down" :color red)
-    ("x" jupyter-org-kill-block-and-results "kill block")
-    ("c" jupyter-org-copy-block-and-results "copy block")
-    ("o" (jupyter-org-clone-block t) "clone")
-    ("m" jupyter-org-merge-blocks "merge")
-    ("s" jupyter-org-split-src-block "split")
-    ("a" (jupyter-org-insert-src-block nil current-prefix-arg) "insert above")
-    ("b" (jupyter-org-insert-src-block t current-prefix-arg) "insert below")
-    ("l" org-babel-remove-result "clear result")
-    ("L" jupyter-org-clear-all-results "clear all results")
-    ("h" jupyter-org-edit-header "edit header"))
+;;    "Edit"
+;;    (("<up>" jupyter-org-move-src-block "move up" :color red)
+;;     ("<down>" (jupyter-org-move-src-block t) "move down" :color red)
+;;     ("x" jupyter-org-kill-block-and-results "kill block")
+;;     ("c" jupyter-org-copy-block-and-results "copy block")
+;;     ("o" (jupyter-org-clone-block t) "clone")
+;;     ("m" jupyter-org-merge-blocks "merge")
+;;     ("s" jupyter-org-split-src-block "split")
+;;     ("a" (jupyter-org-insert-src-block nil current-prefix-arg) "insert above")
+;;     ("b" (jupyter-org-insert-src-block t current-prefix-arg) "insert below")
+;;     ("l" org-babel-remove-result "clear result")
+;;     ("L" jupyter-org-clear-all-results "clear all results")
+;;     ("h" jupyter-org-edit-header "edit header"))
 
-   "Misc"
-   (("i" jupyter-org-inspect-src-block "inspect")
-    ("<tab>" completion-at-point "Complete")
+;;    "Misc"
+;;    (("i" jupyter-org-inspect-src-block "inspect")
+;;     ("<tab>" completion-at-point "Complete")
     
-    ("O" scimax-ob/body "scimax-ob")
-    ("q" nil "quit"))
+;;     ("O" scimax-ob/body "scimax-ob")
+;;     ("q" nil "quit"))
    
-   "Kernel"
-   (("s" org-babel-jupyter-scratch-buffer "scratch")
-    ("z" org-babel-switch-to-session "REPL")
-    ("u" jupyter-org-interrupt-kernel "interrupt")
-    ("r" (jupyter-org-with-src-block-client
-	  (jupyter-repl-restart-kernel)) "restart")
-    ("k" scimax-jupyter-org-kill-kernel "kill"))))
+;;    "Kernel"
+;;    (("s" org-babel-jupyter-scratch-buffer "scratch")
+;;     ("z" org-babel-switch-to-session "REPL")
+;;     ("u" jupyter-org-interrupt-kernel "interrupt")
+;;     ("r" (jupyter-org-with-src-block-client
+;; 	  (jupyter-repl-restart-kernel)) "restart")
+;;     ("k" scimax-jupyter-org-kill-kernel "kill"))))
 
 
-(jupyter-org-define-key (kbd "<f12>") #'scimax-jupyter-org-hydra/body)
+;; (jupyter-org-define-key (kbd "<f12>") #'scimax-jupyter-org-hydra/body)
 
 ;; utilities
 ;; * autopep8
