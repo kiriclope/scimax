@@ -5,4 +5,4 @@
 (require 'scimax-org-src-blocks)
 (require 'scimax-jupyter)
 
-(provide 'my-package)
+(provide 'scimax)
