@@ -762,73 +762,73 @@ With a prefix arg cycle backwards."
 
 ;; * a hydra for src blocks
 
-(defhydra scimax-ob (:color red :hint nil)
-  "
-	Execute                   Navigate                 Edit             Misc
------------------------------------------------------------------------------------------------------------------------------
-    _<return>_: current           _i_: previous src        _w_: move up       ^ ^                         _<up>_:
-  _S-<return>_: current and next  _k_: next src            _s_: move down     _l_: clear result  _<left>_:           _<right>_:
-  _M-<return>_: current and new   _q_: visible src         _x_: kill          _L_: clear all              _<down>_:
-_S-M-<return>_: to point          _Q_: any src             _n_: copy          _o_: toggle result folding
-_C-M-<return>_: buffer       _C-<up>_: goto src start      _c_: clone         _N_: toggle line numbers
-	   ^ ^             _C-<down>_: goto src end        _mm_: merge region
-	   ^ ^             _C-<left>_: word left           _mp_: merge prev
-	   ^ ^            _C-<right>_: word right          _mn_: merge next
-	   ^ ^                  _C-<_: src begin           _-_: split
-	   ^ ^                  _C->_: src end             _+_: insert above
-	   ^ ^                    _R_: results             _=_: insert below
-	   ^ ^                    ^ ^                      _h_: header
-_;_: dwim comment  _z_: undo  _y_: redo _r_: Goto repl
+;; (defhydra scimax-ob (:color red :hint nil)
+;;   "
+;; 	Execute                   Navigate                 Edit             Misc
+;; -----------------------------------------------------------------------------------------------------------------------------
+;;     _<return>_: current           _i_: previous src        _w_: move up       ^ ^                         _<up>_:
+;;   _S-<return>_: current and next  _k_: next src            _s_: move down     _l_: clear result  _<left>_:           _<right>_:
+;;   _M-<return>_: current and new   _q_: visible src         _x_: kill          _L_: clear all              _<down>_:
+;; _S-M-<return>_: to point          _Q_: any src             _n_: copy          _o_: toggle result folding
+;; _C-M-<return>_: buffer       _C-<up>_: goto src start      _c_: clone         _N_: toggle line numbers
+;; 	   ^ ^             _C-<down>_: goto src end        _mm_: merge region
+;; 	   ^ ^             _C-<left>_: word left           _mp_: merge prev
+;; 	   ^ ^            _C-<right>_: word right          _mn_: merge next
+;; 	   ^ ^                  _C-<_: src begin           _-_: split
+;; 	   ^ ^                  _C->_: src end             _+_: insert above
+;; 	   ^ ^                    _R_: results             _=_: insert below
+;; 	   ^ ^                    ^ ^                      _h_: header
+;; _;_: dwim comment  _z_: undo  _y_: redo _r_: Goto repl
 
-"
-  ("o" scimax-ob-toggle-output :color red)
-  ("<up>" scimax-ob-edit-up :color red)
-  ("<down>" scimax-ob-edit-down :color red)
-  ("<left>" left-char :color red)
-  ("<right>" right-char :color red)
-  ("C-<up>" scimax-ob-jump-to-first-line :color red)
-  ("C-<down>" scimax-ob-jump-to-end-line :color red)
-  ("C-<left>" left-word :color red)
-  ("C-<right>" right-word :color red)
+;; "
+;;   ("o" scimax-ob-toggle-output :color red)
+;;   ("<up>" scimax-ob-edit-up :color red)
+;;   ("<down>" scimax-ob-edit-down :color red)
+;;   ("<left>" left-char :color red)
+;;   ("<right>" right-char :color red)
+;;   ("C-<up>" scimax-ob-jump-to-first-line :color red)
+;;   ("C-<down>" scimax-ob-jump-to-end-line :color red)
+;;   ("C-<left>" left-word :color red)
+;;   ("C-<right>" right-word :color red)
 
-  ("z" undo-tree-undo :color red)
-  ("y" undo-tree-redo :color red)
+;;   ("z" undo-tree-undo :color red)
+;;   ("y" undo-tree-redo :color red)
 
-  ("<return>" org-ctrl-c-ctrl-c :color blue)
-  ("S-<return>" scimax-ob-execute-and-next-block :color red)
-  ("M-<return>" (lambda ()
-		  "Execute and insert new block."
-		  (interactive)
-		  (scimax-ob-execute-and-next-block t)
-		  (font-lock-fontify-block)) :color red)
-  ("S-M-<return>" scimax-ob-execute-to-point :color blue)
-  ("C-M-<return>" org-babel-execute-buffer :color blue)
-  ("r" org-babel-switch-to-session)
-  ("N" scimax-ob-toggle-line-numbers)
+;;   ("<return>" org-ctrl-c-ctrl-c :color blue)
+;;   ("S-<return>" scimax-ob-execute-and-next-block :color red)
+;;   ("M-<return>" (lambda ()
+;; 		  "Execute and insert new block."
+;; 		  (interactive)
+;; 		  (scimax-ob-execute-and-next-block t)
+;; 		  (font-lock-fontify-block)) :color red)
+;;   ("S-M-<return>" scimax-ob-execute-to-point :color blue)
+;;   ("C-M-<return>" org-babel-execute-buffer :color blue)
+;;   ("r" org-babel-switch-to-session)
+;;   ("N" scimax-ob-toggle-line-numbers)
 
-  ("i" org-babel-previous-src-block :color red)
-  ("k" org-babel-next-src-block :color red)
-  ("q" scimax-ob-jump-to-visible-block)
-  ("Q" scimax-ob-jump-to-block)
-  ("C-<" scimax-ob-jump-to-first-line)
-  ("C->" scimax-ob-jump-to-end-line)
-  ("R" (goto-char (org-babel-where-is-src-block-result)))
+;;   ("i" org-babel-previous-src-block :color red)
+;;   ("k" org-babel-next-src-block :color red)
+;;   ("q" scimax-ob-jump-to-visible-block)
+;;   ("Q" scimax-ob-jump-to-block)
+;;   ("C-<" scimax-ob-jump-to-first-line)
+;;   ("C->" scimax-ob-jump-to-end-line)
+;;   ("R" (goto-char (org-babel-where-is-src-block-result)))
 
-  ("w" scimax-ob-move-src-block-up :color red)
-  ("s" scimax-ob-move-src-block-down :color red)
-  ("x" scimax-ob-kill-block-and-results)
-  ("n" scimax-ob-copy-block-and-results)
-  ("c" scimax-ob-clone-block)
-  ("mm" scimax-ob-merge-blocks)
-  ("mp" scimax-ob-merge-previous)
-  ("mn" scimax-ob-merge-next)
-  ("-" scimax-ob-split-src-block )
-  ("+" scimax-ob-insert-src-block)
-  ("=" (scimax-ob-insert-src-block t))
-  ("l" org-babel-remove-result)
-  ("L" scimax-ob-clear-all-results)
-  ("h" scimax-ob-edit-header)
-  (";" org-comment-dwim :color red))
+;;   ("w" scimax-ob-move-src-block-up :color red)
+;;   ("s" scimax-ob-move-src-block-down :color red)
+;;   ("x" scimax-ob-kill-block-and-results)
+;;   ("n" scimax-ob-copy-block-and-results)
+;;   ("c" scimax-ob-clone-block)
+;;   ("mm" scimax-ob-merge-blocks)
+;;   ("mp" scimax-ob-merge-previous)
+;;   ("mn" scimax-ob-merge-next)
+;;   ("-" scimax-ob-split-src-block )
+;;   ("+" scimax-ob-insert-src-block)
+;;   ("=" (scimax-ob-insert-src-block t))
+;;   ("l" org-babel-remove-result)
+;;   ("L" scimax-ob-clear-all-results)
+;;   ("h" scimax-ob-edit-header)
+;;   (";" org-comment-dwim :color red))
 
 
 (provide 'scimax-ob)
