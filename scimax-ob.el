@@ -9,6 +9,7 @@
 (require 's)
 (require 'dash)
 (require 'avy)
+(require 'hydra)
 
 ;; * create/modify blocks
 
